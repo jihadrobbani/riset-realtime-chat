@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn src/server.ts",
-    "build": "tsc",
+    "tsc": "tsc",
     "start": "node dist/src/server.js",
     "postinstall": "npm run tsc"
   },
@@ -34,7 +34,6 @@
     "moment": "^2.29.1",
     "pg": "^8.7.3",
     "sequelize": "^6.16.1",
-    "tsc": "tsc",
     "uuid": "^8.3.2"
   }
 }
