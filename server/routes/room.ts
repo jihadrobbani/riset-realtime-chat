@@ -1,8 +1,8 @@
 import { Router } from "express";
-import Controller from "../controllers/ChatController";
+import Controller from "../controllers/RoomController";
 
 const router = Router();
 
-router.post("/send", Controller);
+router.post("/send", Controller.getAllChats);
 
 export default router;
