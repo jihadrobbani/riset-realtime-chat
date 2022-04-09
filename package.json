@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "push:heroku": "git subtree push --prefix server heroku main"
+  }
+}
