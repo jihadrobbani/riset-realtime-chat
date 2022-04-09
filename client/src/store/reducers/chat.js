@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  chats: [],
+};
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {

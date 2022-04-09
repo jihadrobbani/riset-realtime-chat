@@ -1,16 +1,31 @@
 import axios from '../../config/axios';
 
 export const login = username => async (dispatch, getState) => {
+  dispatch({ type: 'LOGIN_LOADING' });
   try {
-    const data = await axios({
+    const { data } = await axios({
       method: 'POST',
-      url: 'https://riset-realtime-chat.herokuapp.com/login',
+      url: 'login',
       data: { username },
     });
-    console.log(data);
+    dispatch({ type: 'LOGIN_SUCCESS', payload: data });
   } catch (e) {
+    dispatch({ type: 'LOGIN_ERROR' });
     console.log(e);
   }
 };
 
-export const logout = username => (dispatch, getState) => {};
+export const logout = username => async (dispatch, getState) => {
+  dispatch({ type: 'LOGIN_LOADING' });
+  try {
+    await axios({
+      method: 'POST',
+      url: 'logout',
+      data: { username },
+    });
+    dispatch({ type: 'LOGOUT' });
+  } catch (e) {
+    dispatch({ type: 'LOGIN_ERROR' });
+    console.log(e);
+  }
+};
