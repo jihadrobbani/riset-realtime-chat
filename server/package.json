@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn src/server.ts",
     "tsc": "tsc",
-    "start": "node dist/src/server.js",
+    "start": "node dist/src/index.js",
     "postinstall": "npm run tsc"
   },
   "keywords": [],
