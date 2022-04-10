@@ -3,6 +3,6 @@ import Controller from "../controllers/RoomController";
 
 const router = Router();
 
-router.post("/send", Controller.getAllChats);
+router.post("/find", Controller.createOrFindRoom);
 
 export default router;

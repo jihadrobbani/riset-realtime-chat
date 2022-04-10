@@ -2,7 +2,9 @@ import "dotenv/config";
 import express from "express";
 import db from "./config/database.config";
 import cors from "cors";
-import router from "./routes";
+import routes from "./routes";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 db.authenticate()
   .then(() => {
@@ -21,7 +23,11 @@ const port = process.env.PORT || 9000;
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 app.use(express.urlencoded({ extended: true }));
-app.use("/", router);
+
+const server = createServer(app);
+const io = new Server(server);
+app.set("socketio", io);
+app.use("/", routes);
 
 app.listen(port, () => {
   console.log(`App listens on port ${port}`);

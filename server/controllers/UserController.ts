@@ -44,6 +44,18 @@ class Controller {
     }
   }
 
+  static async getUser(req: Request, res: Response) {
+    const { user } = res.locals;
+    try {
+      const data = await User.findOne({
+        where: { id: user.dataValues.id },
+      });
+      return res.json({ message: "Success", payload: data?.get() });
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
   static async getUsers(req: Request, res: Response) {
     const { user } = res.locals;
     try {

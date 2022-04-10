@@ -31,6 +31,16 @@ class Controller {
       return res.status(500).json(e);
     }
   }
+
+  static async getAllChats(req: Request, res: Response) {
+    const { roomId } = req.body;
+    try {
+      const payload = Chat.findAll({ where: { roomId } });
+      return res.json({ message: "Success", payload });
+    } catch (e) {
+      return res.status(500).json(e);
+    }
+  }
 }
 
 export default Controller;
