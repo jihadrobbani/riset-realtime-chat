@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
 import { Chat, Room } from "../models";
 import { v4 as uuidv4 } from "uuid";
+import { ChatInterface } from "../interfaces/Chat";
 
 class Controller {
   static async sendChat(req: Request, res: Response) {
-    const { userId, roomId, text } = req.body;
+    const { user } = res.locals;
+    const { roomId, text } = req.body;
     try {
       const payload = await Chat.create({
         id: uuidv4(),
-        userId,
+        userId: user.dataValues.id,
         roomId,
         read: false,
         text,
@@ -20,7 +22,8 @@ class Controller {
   }
 
   static async readChat(req: Request, res: Response) {
-    const { id } = req.body;
+    const { id } = req.params;
+
     try {
       const data = await Chat.update(
         { read: true },
@@ -33,12 +36,28 @@ class Controller {
   }
 
   static async getAllChats(req: Request, res: Response) {
-    const { roomId } = req.body;
+    const { roomId } = req.params;
     try {
-      const payload = Chat.findAll({ where: { roomId } });
+      const payload = await Chat.findAll({
+        where: { roomId },
+        order: [["createdAt", "DESC"]],
+      });
       return res.json({ message: "Success", payload });
     } catch (e) {
       return res.status(500).json(e);
+    }
+  }
+
+  static async returnAllChats(roomId: string) {
+    try {
+      const payload = await Chat.findAll({
+        where: { roomId },
+        order: [["createdAt", "DESC"]],
+      });
+      return payload;
+    } catch (e) {
+      console.log(e);
+      return null;
     }
   }
 }

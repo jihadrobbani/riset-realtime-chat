@@ -3,7 +3,12 @@ const initialState = {
   loginLoading: false,
   loginSuccess: false,
   loginError: false,
+  token: '',
   user: {},
+  getUsersLoading: false,
+  getUsersSuccess: false,
+  getUsersError: false,
+  users: [],
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -24,7 +29,8 @@ export default (state = initialState, { type, payload }) => {
         loginLoading: false,
         loginSuccess: true,
         loginError: false,
-        user: payload,
+        token: payload.token,
+        user: payload.user,
       };
     case 'LOGIN_ERROR':
       return {
@@ -42,6 +48,29 @@ export default (state = initialState, { type, payload }) => {
         loginSuccess: false,
         loginError: false,
         user: {},
+      };
+    case 'GET_USERS_LOADING':
+      return {
+        ...state,
+        getUsersLoading: true,
+        getUsersSuccess: false,
+        getUsersError: false,
+        users: [],
+      };
+    case 'GET_USERS_SUCCESS':
+      return {
+        ...state,
+        getUsersLoading: false,
+        getUsersSuccess: true,
+        getUsersError: false,
+        users: payload,
+      };
+    case 'GET_USERS_ERROR':
+      return {
+        ...state,
+        getUsersLoading: false,
+        getUsersSuccess: false,
+        getUsersError: true,
       };
     default:
       return state;

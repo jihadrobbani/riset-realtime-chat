@@ -23,13 +23,14 @@ export default () => {
   useEffect(() => {
     if (loginSuccess) {
       navigation.navigate('Lobby');
-    } else if (loginError) {
+    } else if (!loginLoading && loginError) {
       Alert.alert('Login error');
+      console.log(loginLoading, loginSuccess, loginError);
     }
   }, [loginLoading]);
 
   onSubmit = () => {
-    dispatch(login(input));
+    if (input) dispatch(login(input));
   };
 
   return (
