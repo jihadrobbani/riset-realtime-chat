@@ -40,7 +40,7 @@ export default () => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(io('http://localhost:9000'));
+    setSocket(io('https://riset-realtime-chat.herokuapp.com'));
     dispatch(getUsers());
 
     return () => {

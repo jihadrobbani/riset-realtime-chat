@@ -33,7 +33,7 @@ export default () => {
   };
 
   useEffect(() => {
-    setSocket(io('http://localhost:9000'));
+    setSocket(io('https://riset-realtime-chat.herokuapp.com'));
     dispatch(getChats(room.id));
   }, []);
 
