@@ -114,7 +114,7 @@ export default () => {
               marginRight: 10,
             }}>
             <TextInput
-              style={{ paddingBottom: 0, flex: 1, fontSize: 16 }}
+              style={{ padding: 0, flex: 1, fontSize: 16 }}
               value={input}
               onChangeText={text => setInput(text)}
             />
