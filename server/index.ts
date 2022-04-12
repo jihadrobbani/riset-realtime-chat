@@ -52,7 +52,7 @@ io.on("connection", (socket: Socket) => {
       const data = await ChatController.returnAllChats(roomId);
       io.sockets.in(roomId).emit("newChat", data);
       // socket.to(roomId).emit("newChat", data);
-    }, 1000);
+    }, 300);
   });
 });
 
